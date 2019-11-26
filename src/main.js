@@ -1,3 +1,5 @@
+'use strict';
+
 const createSiteMenuTemplate = () =>
   `<section class="control__btn-wrap">
     <input
@@ -439,20 +441,20 @@ const createLoadMoreBtnTemplate = () =>
   `<button class="load-more" type="button">load more</button>`;
 
 const render = (container, template) => {
-  container.insertAdjacentHTML(`beforeend`, template)
+  container.insertAdjacentHTML(`beforeend`, template);
 };
 
 const siteMainElevent = document.querySelector(`.main`);
-const siteHeaderElement = siteMainElevent.querySelector('.main__control');
+const siteHeaderElement = siteMainElevent.querySelector(`.main__control`);
 
 render(siteHeaderElement, createSiteMenuTemplate());
 render(siteMainElevent, createFilterTemplate());
 render(siteMainElevent, createBoardTemplate());
 
-const boardElement = siteMainElevent.querySelector('.board');
-const taskListElement = boardElement.querySelector('.board__tasks');
+const boardElement = siteMainElevent.querySelector(`.board`);
+const taskListElement = boardElement.querySelector(`.board__tasks`);
 
 render(boardElement, createLoadMoreBtnTemplate());
 render(taskListElement, createTaskEditTemplate());
 
-['', '', ''].map(() => render(taskListElement, createTaskTemplate()));
+[``, ``, ``].map(() => render(taskListElement, createTaskTemplate()));
