@@ -1,3 +1,5 @@
+import {createElement} from "../utils";
+
 const createFilterMarkup = (filter, isChecked) => {
   return (
     `<input
@@ -11,10 +13,10 @@ const createFilterMarkup = (filter, isChecked) => {
       ${filter.name} 
       <span class="filter__archive-count">${filter.count}</span>
     </label>`
-  )
+  );
 };
 
-export const createFilterTemplate = (filters) => {
+const createFilterTemplate = (filters) => {
   const filtersMarkup = filters.map((it, index) => createFilterMarkup(it, index === 0)).join(``);
 
   return (
@@ -24,3 +26,25 @@ export const createFilterTemplate = (filters) => {
   );
 };
 
+export default class Filter {
+  constructor(filters) {
+    this._filters = filters;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilterTemplate(this._filters);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
